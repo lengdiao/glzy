@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ecard.mapper.DrugStorePersonMapper">
+  <resultMap id="BaseResultMap" type="com.ecard.entity.DrugStorePerson">
+    <id column="Id" jdbcType="BIGINT" property="id" />
+    <result column="CloudPassNo" jdbcType="BIGINT" property="cloudPassNo" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="Phone" jdbcType="VARCHAR" property="phone" />
+    <result column="DrugStoreNo" jdbcType="BIGINT" property="drugStoreNo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Id, CloudPassNo, Name, Phone, DrugStoreNo
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from drugstoreperson
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from drugstoreperson
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ecard.entity.DrugStorePerson">
+    insert into drugstoreperson (Id, CloudPassNo, Name, 
+      Phone, DrugStoreNo)
+    values (#{id,jdbcType=BIGINT}, #{cloudPassNo,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{drugStoreNo,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ecard.entity.DrugStorePerson">
+    insert into drugstoreperson
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="cloudPassNo != null">
+        CloudPassNo,
+      </if>
+      <if test="name != null">
+        Name,
+      </if>
+      <if test="phone != null">
+        Phone,
+      </if>
+      <if test="drugStoreNo != null">
+        DrugStoreNo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="cloudPassNo != null">
+        #{cloudPassNo,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="drugStoreNo != null">
+        #{drugStoreNo,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ecard.entity.DrugStorePerson">
+    update drugstoreperson
+    <set>
+      <if test="cloudPassNo != null">
+        CloudPassNo = #{cloudPassNo,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        Phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="drugStoreNo != null">
+        DrugStoreNo = #{drugStoreNo,jdbcType=BIGINT},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ecard.entity.DrugStorePerson">
+    update drugstoreperson
+    set CloudPassNo = #{cloudPassNo,jdbcType=BIGINT},
+      Name = #{name,jdbcType=VARCHAR},
+      Phone = #{phone,jdbcType=VARCHAR},
+      DrugStoreNo = #{drugStoreNo,jdbcType=BIGINT}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByNamePhoneNo" resultType="com.ecard.pojo.queryResult.DrugStorePersonQr">
+  	select dsp.id,dsp.cloudPassNo,dsp.name,dsp.phone,dsp.drugStoreNo,
+(select drugStoreName from drugstore where DrugStoreNo=dsp.drugStoreNo)as drugStoreName,
+(select disableFlag from cloudpassinfo where CloudPassNo = dsp.cloudPassNo)as disableFlag 
+  	from drugstoreperson dsp,drugstore ds,cloudpassinfo cpi 
+  	where dsp.CloudPassNo = cpi.CloudPassNo and dsp.DrugStoreNo = ds.DrugStoreNo
+  	<if test="name != null and name !=''">
+        and dsp.Name like CONCAT('%',#{name,jdbcType=VARCHAR},'%')
+      </if>
+      <if test="phone != null and phone !=''">
+        and dsp.Phone = #{phone,jdbcType=VARCHAR}
+      </if>
+      <if test="drugStoreNo != null">
+        and dsp.DrugStoreNo = #{drugStoreNo,jdbcType=BIGINT}
+      </if>
+  </select>
+</mapper>

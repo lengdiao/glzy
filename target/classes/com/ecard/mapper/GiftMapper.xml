@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ecard.mapper.GiftMapper">
+  <resultMap id="BaseResultMap" type="com.ecard.entity.Gift">
+    <id column="Id" jdbcType="BIGINT" property="id" />
+    <result column="DrugA" jdbcType="VARCHAR" property="drugA" />
+    <result column="DrugB" jdbcType="VARCHAR" property="drugB" />
+    <result column="MallNo" jdbcType="BIGINT" property="mallNo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Id, DrugA, DrugB, MallNo
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from gift
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from gift
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ecard.entity.Gift">
+    insert into gift (Id, DrugA, DrugB, 
+      MallNo)
+    values (#{id,jdbcType=BIGINT}, #{drugA,jdbcType=VARCHAR}, #{drugB,jdbcType=VARCHAR}, 
+      #{mallNo,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ecard.entity.Gift">
+    insert into gift
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="drugA != null">
+        DrugA,
+      </if>
+      <if test="drugB != null">
+        DrugB,
+      </if>
+      <if test="mallNo != null">
+        MallNo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="drugA != null">
+        #{drugA,jdbcType=VARCHAR},
+      </if>
+      <if test="drugB != null">
+        #{drugB,jdbcType=VARCHAR},
+      </if>
+      <if test="mallNo != null">
+        #{mallNo,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ecard.entity.Gift">
+    update gift
+    <set>
+      <if test="drugA != null">
+        DrugA = #{drugA,jdbcType=VARCHAR},
+      </if>
+      <if test="drugB != null">
+        DrugB = #{drugB,jdbcType=VARCHAR},
+      </if>
+      <if test="mallNo != null">
+        MallNo = #{mallNo,jdbcType=BIGINT},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ecard.entity.Gift">
+    update gift
+    set DrugA = #{drugA,jdbcType=VARCHAR},
+      DrugB = #{drugB,jdbcType=VARCHAR},
+      MallNo = #{mallNo,jdbcType=BIGINT}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByMallNo" >
+    update gift
+    set DrugA = #{drugA,jdbcType=VARCHAR},
+      DrugB = #{drugB,jdbcType=VARCHAR}
+    where MallNo = #{mallNo,jdbcType=BIGINT}
+  </update>
+</mapper>

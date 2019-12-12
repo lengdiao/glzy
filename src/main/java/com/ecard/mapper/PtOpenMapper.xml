@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ecard.mapper.PtOpenMapper">
+  <resultMap id="BaseResultMap" type="com.ecard.entity.PtOpen">
+    <id column="Id" jdbcType="BIGINT" property="id" />
+    <result column="PtNo" jdbcType="BIGINT" property="ptNo" />
+    <result column="OpenId" jdbcType="VARCHAR" property="openId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    Id, PtNo, OpenId
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ptopen
+    where Id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ptopen
+    where Id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ecard.entity.PtOpen">
+    insert into ptopen (Id, PtNo, OpenId
+      )
+    values (#{id,jdbcType=BIGINT}, #{ptNo,jdbcType=BIGINT}, #{openId,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.ecard.entity.PtOpen">
+    insert into ptopen
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        Id,
+      </if>
+      <if test="ptNo != null">
+        PtNo,
+      </if>
+      <if test="openId != null">
+        OpenId,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="ptNo != null">
+        #{ptNo,jdbcType=BIGINT},
+      </if>
+      <if test="openId != null">
+        #{openId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ecard.entity.PtOpen">
+    update ptopen
+    <set>
+      <if test="ptNo != null">
+        PtNo = #{ptNo,jdbcType=BIGINT},
+      </if>
+      <if test="openId != null">
+        OpenId = #{openId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ecard.entity.PtOpen">
+    update ptopen
+    set PtNo = #{ptNo,jdbcType=BIGINT},
+      OpenId = #{openId,jdbcType=VARCHAR}
+    where Id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="findByPtOpenId" resultType="com.ecard.entity.PtOpen">
+  	select * from ptopen where OpenId = #{openId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPtNo" parameterType="java.lang.Long">
+    delete from ptopen
+    where PtNo = #{ptNo,jdbcType=BIGINT}
+  </delete>
+  <select id="findByPtNo" parameterType="java.lang.Long" resultType="com.ecard.entity.PtOpen">
+  	select * from ptopen where PtNo = #{ptNo,jdbcType=BIGINT}
+  </select>
+</mapper>

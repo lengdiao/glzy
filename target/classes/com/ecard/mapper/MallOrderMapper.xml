@@ -1,0 +1,517 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ecard.mapper.MallOrderMapper">
+  <resultMap id="BaseResultMap" type="com.ecard.entity.MallOrder">
+    <id column="MallNo" jdbcType="BIGINT" property="mallNo" />
+    <result column="CloudPassNo" jdbcType="BIGINT" property="cloudPassNo" />
+    <result column="DrugId" jdbcType="BIGINT" property="drugId" />
+    <result column="Number" jdbcType="INTEGER" property="number" />
+    <result column="DrugStoreNo" jdbcType="BIGINT" property="drugStoreNo" />
+    <result column="DrugStorePerson" jdbcType="VARCHAR" property="drugStorePerson" />
+    <result column="IdCardImg" jdbcType="VARCHAR" property="idCardImg" />
+    <result column="AgreeImg" jdbcType="VARCHAR" property="agreeImg" />
+    <result column="RecordImg" jdbcType="VARCHAR" property="recordImg" />
+    <result column="RecipeImg" jdbcType="VARCHAR" property="recipeImg" />
+    <result column="DiagnosisImg" jdbcType="VARCHAR" property="diagnosisImg" />
+    <result column="OrderAmount" jdbcType="DECIMAL" property="orderAmount" />
+    <result column="OrderStatus" jdbcType="INTEGER" property="orderStatus" />
+    <result column="OrderTime" jdbcType="TIMESTAMP" property="orderTime" />
+    <result column="CheckStatus" jdbcType="INTEGER" property="checkStatus" />
+    <result column="Cause" jdbcType="VARCHAR" property="cause" />
+    <result column="PayStatus" jdbcType="INTEGER" property="payStatus" />
+    <result column="PayAmount" jdbcType="DECIMAL" property="payAmount" />
+    <result column="PayTime" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="ShippingStatus" jdbcType="INTEGER" property="shippingStatus" />
+    <result column="ShippingCompany" jdbcType="VARCHAR" property="shippingCompany" />
+    <result column="ShippingContext" jdbcType="VARCHAR" property="shippingContext" />
+    <result column="ShippingNo" jdbcType="VARCHAR" property="shippingNo" />
+    <result column="ShippingTime" jdbcType="TIMESTAMP" property="shippingTime" />
+    <result column="CreateUser" jdbcType="VARCHAR" property="createUser" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UpdateUser" jdbcType="VARCHAR" property="updateUser" />
+    <result column="UpdateTime" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="Version" jdbcType="INTEGER" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    MallNo, CloudPassNo, DrugId, Number, DrugStoreNo, DrugStorePerson, IdCardImg, AgreeImg, 
+    RecordImg, RecipeImg, DiagnosisImg, OrderAmount, OrderStatus, OrderTime, CheckStatus, 
+    Cause, PayStatus, PayAmount, PayTime, ShippingStatus, ShippingCompany, ShippingContext, 
+    ShippingNo, ShippingTime, CreateUser, CreateTime, UpdateUser, UpdateTime, Version
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from mallorder
+    where MallNo = #{mallNo,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from mallorder
+    where MallNo = #{mallNo,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ecard.entity.MallOrder"
+  useGeneratedKeys="true" keyProperty="mallNo" keyColumn="MallNo">
+    insert into mallorder (MallNo, CloudPassNo, DrugId, 
+      Number, DrugStoreNo, DrugStorePerson, 
+      IdCardImg, AgreeImg, RecordImg, 
+      RecipeImg, DiagnosisImg, OrderAmount, 
+      OrderStatus, OrderTime, CheckStatus, 
+      Cause, PayStatus, PayAmount, 
+      PayTime, ShippingStatus, ShippingCompany, 
+      ShippingContext, ShippingNo, ShippingTime, 
+      CreateUser, CreateTime, UpdateUser, 
+      UpdateTime, Version)
+    values (#{mallNo,jdbcType=BIGINT}, #{cloudPassNo,jdbcType=BIGINT}, #{drugId,jdbcType=BIGINT}, 
+      #{number,jdbcType=INTEGER}, #{drugStoreNo,jdbcType=BIGINT}, #{drugStorePerson,jdbcType=VARCHAR}, 
+      #{idCardImg,jdbcType=VARCHAR}, #{agreeImg,jdbcType=VARCHAR}, #{recordImg,jdbcType=VARCHAR}, 
+      #{recipeImg,jdbcType=VARCHAR}, #{diagnosisImg,jdbcType=VARCHAR}, #{orderAmount,jdbcType=DECIMAL}, 
+      #{orderStatus,jdbcType=INTEGER}, #{orderTime,jdbcType=TIMESTAMP}, #{checkStatus,jdbcType=INTEGER}, 
+      #{cause,jdbcType=VARCHAR}, #{payStatus,jdbcType=INTEGER}, #{payAmount,jdbcType=DECIMAL}, 
+      #{payTime,jdbcType=TIMESTAMP}, #{shippingStatus,jdbcType=INTEGER}, #{shippingCompany,jdbcType=VARCHAR}, 
+      #{shippingContext,jdbcType=VARCHAR}, #{shippingNo,jdbcType=VARCHAR}, #{shippingTime,jdbcType=TIMESTAMP}, 
+      #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ecard.entity.MallOrder"
+   useGeneratedKeys="true" keyProperty="mallNo" keyColumn="MallNo">
+    insert into mallorder
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mallNo != null">
+        MallNo,
+      </if>
+      <if test="cloudPassNo != null">
+        CloudPassNo,
+      </if>
+      <if test="drugId != null">
+        DrugId,
+      </if>
+      <if test="number != null">
+        Number,
+      </if>
+      <if test="drugStoreNo != null">
+        DrugStoreNo,
+      </if>
+      <if test="drugStorePerson != null">
+        DrugStorePerson,
+      </if>
+      <if test="idCardImg != null">
+        IdCardImg,
+      </if>
+      <if test="agreeImg != null">
+        AgreeImg,
+      </if>
+      <if test="recordImg != null">
+        RecordImg,
+      </if>
+      <if test="recipeImg != null">
+        RecipeImg,
+      </if>
+      <if test="diagnosisImg != null">
+        DiagnosisImg,
+      </if>
+      <if test="orderAmount != null">
+        OrderAmount,
+      </if>
+      <if test="orderStatus != null">
+        OrderStatus,
+      </if>
+      <if test="orderTime != null">
+        OrderTime,
+      </if>
+      <if test="checkStatus != null">
+        CheckStatus,
+      </if>
+      <if test="cause != null">
+        Cause,
+      </if>
+      <if test="payStatus != null">
+        PayStatus,
+      </if>
+      <if test="payAmount != null">
+        PayAmount,
+      </if>
+      <if test="payTime != null">
+        PayTime,
+      </if>
+      <if test="shippingStatus != null">
+        ShippingStatus,
+      </if>
+      <if test="shippingCompany != null">
+        ShippingCompany,
+      </if>
+      <if test="shippingContext != null">
+        ShippingContext,
+      </if>
+      <if test="shippingNo != null">
+        ShippingNo,
+      </if>
+      <if test="shippingTime != null">
+        ShippingTime,
+      </if>
+      <if test="createUser != null">
+        CreateUser,
+      </if>
+      <if test="createTime != null">
+        CreateTime,
+      </if>
+      <if test="updateUser != null">
+        UpdateUser,
+      </if>
+      <if test="updateTime != null">
+        UpdateTime,
+      </if>
+      <if test="version != null">
+        Version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mallNo != null">
+        #{mallNo,jdbcType=BIGINT},
+      </if>
+      <if test="cloudPassNo != null">
+        #{cloudPassNo,jdbcType=BIGINT},
+      </if>
+      <if test="drugId != null">
+        #{drugId,jdbcType=BIGINT},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="drugStoreNo != null">
+        #{drugStoreNo,jdbcType=BIGINT},
+      </if>
+      <if test="drugStorePerson != null">
+        #{drugStorePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardImg != null">
+        #{idCardImg,jdbcType=VARCHAR},
+      </if>
+      <if test="agreeImg != null">
+        #{agreeImg,jdbcType=VARCHAR},
+      </if>
+      <if test="recordImg != null">
+        #{recordImg,jdbcType=VARCHAR},
+      </if>
+      <if test="recipeImg != null">
+        #{recipeImg,jdbcType=VARCHAR},
+      </if>
+      <if test="diagnosisImg != null">
+        #{diagnosisImg,jdbcType=VARCHAR},
+      </if>
+      <if test="orderAmount != null">
+        #{orderAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderTime != null">
+        #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkStatus != null">
+        #{checkStatus,jdbcType=INTEGER},
+      </if>
+      <if test="cause != null">
+        #{cause,jdbcType=VARCHAR},
+      </if>
+      <if test="payStatus != null">
+        #{payStatus,jdbcType=INTEGER},
+      </if>
+      <if test="payAmount != null">
+        #{payAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="payTime != null">
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shippingStatus != null">
+        #{shippingStatus,jdbcType=INTEGER},
+      </if>
+      <if test="shippingCompany != null">
+        #{shippingCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingContext != null">
+        #{shippingContext,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingNo != null">
+        #{shippingNo,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingTime != null">
+        #{shippingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ecard.entity.MallOrder">
+    update mallorder
+    <set>
+      <if test="cloudPassNo != null">
+        CloudPassNo = #{cloudPassNo,jdbcType=BIGINT},
+      </if>
+      <if test="drugId != null">
+        DrugId = #{drugId,jdbcType=BIGINT},
+      </if>
+      <if test="number != null">
+        Number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="drugStoreNo != null">
+        DrugStoreNo = #{drugStoreNo,jdbcType=BIGINT},
+      </if>
+      <if test="drugStorePerson != null">
+        DrugStorePerson = #{drugStorePerson,jdbcType=VARCHAR},
+      </if>
+      <if test="idCardImg != null">
+        IdCardImg = #{idCardImg,jdbcType=VARCHAR},
+      </if>
+      <if test="agreeImg != null">
+        AgreeImg = #{agreeImg,jdbcType=VARCHAR},
+      </if>
+      <if test="recordImg != null">
+        RecordImg = #{recordImg,jdbcType=VARCHAR},
+      </if>
+      <if test="recipeImg != null">
+        RecipeImg = #{recipeImg,jdbcType=VARCHAR},
+      </if>
+      <if test="diagnosisImg != null">
+        DiagnosisImg = #{diagnosisImg,jdbcType=VARCHAR},
+      </if>
+      <if test="orderAmount != null">
+        OrderAmount = #{orderAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="orderStatus != null">
+        OrderStatus = #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="orderTime != null">
+        OrderTime = #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkStatus != null">
+        CheckStatus = #{checkStatus,jdbcType=INTEGER},
+      </if>
+      <if test="cause != null">
+        Cause = #{cause,jdbcType=VARCHAR},
+      </if>
+      <if test="payStatus != null">
+        PayStatus = #{payStatus,jdbcType=INTEGER},
+      </if>
+      <if test="payAmount != null">
+        PayAmount = #{payAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="payTime != null">
+        PayTime = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shippingStatus != null">
+        ShippingStatus = #{shippingStatus,jdbcType=INTEGER},
+      </if>
+      <if test="shippingCompany != null and shippingCompany != 'null' and shippingCompany != ''">
+        ShippingCompany = #{shippingCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingContext != null">
+        ShippingContext = #{shippingContext,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingNo != null and shippingNo !='' and shippingNo !='null'">
+        ShippingNo = #{shippingNo,jdbcType=VARCHAR},
+      </if>
+      <if test="shippingTime != null">
+        ShippingTime = #{shippingTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createUser != null">
+        CreateUser = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CreateTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        UpdateUser = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        Version = #{version,jdbcType=INTEGER},
+      </if>
+    </set>
+    where MallNo = #{mallNo,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ecard.entity.MallOrder">
+    update mallorder
+    set CloudPassNo = #{cloudPassNo,jdbcType=BIGINT},
+      DrugId = #{drugId,jdbcType=BIGINT},
+      Number = #{number,jdbcType=INTEGER},
+      DrugStoreNo = #{drugStoreNo,jdbcType=BIGINT},
+      DrugStorePerson = #{drugStorePerson,jdbcType=VARCHAR},
+      IdCardImg = #{idCardImg,jdbcType=VARCHAR},
+      AgreeImg = #{agreeImg,jdbcType=VARCHAR},
+      RecordImg = #{recordImg,jdbcType=VARCHAR},
+      RecipeImg = #{recipeImg,jdbcType=VARCHAR},
+      DiagnosisImg = #{diagnosisImg,jdbcType=VARCHAR},
+      OrderAmount = #{orderAmount,jdbcType=DECIMAL},
+      OrderStatus = #{orderStatus,jdbcType=INTEGER},
+      OrderTime = #{orderTime,jdbcType=TIMESTAMP},
+      CheckStatus = #{checkStatus,jdbcType=INTEGER},
+      Cause = #{cause,jdbcType=VARCHAR},
+      PayStatus = #{payStatus,jdbcType=INTEGER},
+      PayAmount = #{payAmount,jdbcType=DECIMAL},
+      PayTime = #{payTime,jdbcType=TIMESTAMP},
+      ShippingStatus = #{shippingStatus,jdbcType=INTEGER},
+      ShippingCompany = #{shippingCompany,jdbcType=VARCHAR},
+      ShippingContext = #{shippingContext,jdbcType=VARCHAR},
+      ShippingNo = #{shippingNo,jdbcType=VARCHAR},
+      ShippingTime = #{shippingTime,jdbcType=TIMESTAMP},
+      CreateUser = #{createUser,jdbcType=VARCHAR},
+      CreateTime = #{createTime,jdbcType=TIMESTAMP},
+      UpdateUser = #{updateUser,jdbcType=VARCHAR},
+      UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+      Version = #{version,jdbcType=INTEGER}
+    where MallNo = #{mallNo,jdbcType=BIGINT}
+  </update>
+  <select id="findMallOrder" resultType="com.ecard.pojo.queryResult.MallOrderQr">
+  	select
+		mall.MallNo,
+		mall.OrderTime,
+		cloud.Name,
+		cloud.Phone,
+		pt.Name as addressName,
+		pt.Phone addressPhone,
+		pt.Address,
+		drug.DrugName,
+		mall.Number,
+		drug.DrugPrice,
+		mall.OrderAmount,
+		mall.PayAmount,
+		mall.ShippingCompany,
+		mall.ShippingNo,
+		cloud.IdNo,
+		mall.IdCardImg as idCardImg,
+		mall.DrugStorePerson,
+		mall.DrugStoreNo,
+		mall.AgreeImg as agreeImg,
+		mall.RecipeImg as recipeImg,
+		mall.RecordImg as recordImg,
+		mall.DiagnosisImg as diagnosisImg,
+		mall.CheckStatus,
+		mall.Cause,
+		mall.ShippingStatus,
+		pt.VolunteerName,
+		pt.VolPhone,
+		gi.DrugA,
+		gi.DrugB
+	from cloudpassinfo cloud left JOIN ptinfo pt ON pt.CloudPassNo = cloud.CloudPassNo
+	JOIN mallorder mall on mall.CloudPassNo = pt.CloudPassNo
+	JOIN drugset drug on drug.DrugNo = mall.DrugId
+	JOIN gift gi on gi.MallNo = mall.MallNo
+	<if test="mallNo != null and mallNo !=''">
+        and mall.MallNo = #{mallNo,jdbcType=BIGINT}
+    </if>
+    <if test="startTime != null and startTime !=''">
+         and  mall.`OrderTime` &gt; #{startTime,jdbcType=VARCHAR}       
+    </if>
+    <if test="stopTime != null and stopTime !=''">
+       and  mall.`OrderTime` &lt; #{stopTime,jdbcType=VARCHAR}       
+    </if>  
+    <if test="checkStatus != null">
+        and mall.CheckStatus = #{checkStatus,jdbcType=INTEGER}
+    </if>
+    <if test="shippingStatus != null">
+        and mall.ShippingStatus = #{shippingStatus,jdbcType=INTEGER}
+    </if>
+    <if test="orderStatus != null">
+        and mall.OrderStatus = #{orderStatus,jdbcType=INTEGER}
+    </if>
+  </select>
+  <select id="generateMallno" resultType="java.lang.Long">
+		call generate_mallNo(@a)
+  </select>
+  <select id="findMallOrderByCode" resultType="com.ecard.pojo.queryResult.MallOrderQr">
+  	select
+		mall.MallNo,
+		mall.OrderTime,
+		cloud.Name,
+		cloud.Phone,
+		pt.Name as addressName,
+		pt.Phone addressPhone,
+		pt.Address,
+		drug.DrugName,
+		mall.Number,
+		drug.DrugPrice,
+		mall.OrderAmount,
+		mall.PayAmount,
+		mall.ShippingCompany,
+		mall.ShippingNo,
+		cloud.IdNo,
+		mall.IdCardImg,
+		mall.DrugStorePerson,
+		mall.AgreeImg,
+		mall.RecipeImg,
+		mall.RecordImg,
+		mall.DiagnosisImg,
+		mall.CheckStatus,
+		mall.Cause,
+		mall.ShippingStatus,
+		pt.VolunteerName,
+		pt.VolPhone,
+		gi.DrugA,
+		gi.DrugB
+	from cloudpassinfo cloud left JOIN ptinfo pt ON pt.CloudPassNo = cloud.CloudPassNo
+	JOIN mallorder mall on mall.CloudPassNo = pt.CloudPassNo
+	JOIN drugset drug on drug.DrugNo = mall.DrugId
+	JOIN gift gi on gi.MallNo = mall.MallNo
+	where 1=1
+	<if test="name != null and name !=''">
+        and (cloud.name = #{name,jdbcType=BIGINT} or pt.VolunteerName = #{name,jdbcType=BIGINT})
+    </if>
+    <if test="phone != null and phone !=''">
+         and  (cloud.phone = #{phone,jdbcType=BIGINT} or pt.VolPhone = #{phone,jdbcType=BIGINT}) 
+    </if>
+  </select>
+  <select id="findMallOrderByCloudNo" resultType="com.ecard.pojo.queryResult.MallOrderQr" parameterType="java.lang.Long">
+  	select
+		mall.MallNo,
+		mall.OrderTime,
+		cloud.Name,
+		cloud.Phone,
+		pt.Name as addressName,
+		pt.Phone addressPhone,
+		pt.Address,
+		drug.DrugName,
+		mall.Number,
+		drug.DrugPrice,
+		mall.OrderAmount,
+		mall.PayAmount,
+		mall.ShippingCompany,
+		mall.ShippingNo,
+		cloud.IdNo,
+		mall.IdCardImg as idCardImg,
+		mall.DrugStorePerson,
+		mall.AgreeImg as agreeImg,
+		mall.RecipeImg as recipeImg,
+		mall.RecordImg as recordImg,
+		mall.DiagnosisImg as diagnosisImg,
+		mall.CheckStatus,
+		mall.Cause,
+		mall.ShippingStatus,
+		gi.DrugA,
+		gi.DrugB,
+		mall.OrderStatus,
+		mall.ShippingStatus,
+		mall.PayStatus,
+		pt.VolunteerName,
+		pt.VolPhone
+	from cloudpassinfo cloud left JOIN ptinfo pt ON pt.CloudPassNo = cloud.CloudPassNo
+	JOIN mallorder mall on mall.CloudPassNo = pt.CloudPassNo
+	left JOIN drugset drug on drug.DrugNo = mall.DrugId
+	JOIN gift gi on gi.MallNo = mall.MallNo
+	where mall.CloudPassNo = #{cloudPassNo,jdbcType=BIGINT}
+  </select>
+  
+</mapper>

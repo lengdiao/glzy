@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ecard.mapper.PtInfoMapper">
+  <resultMap id="BaseResultMap" type="com.ecard.entity.PtInfo">
+    <id column="PtNo" jdbcType="BIGINT" property="ptNo" />
+    <result column="CloudPassNo" jdbcType="BIGINT" property="cloudPassNo" />
+    <result column="Name" jdbcType="VARCHAR" property="name" />
+    <result column="Address" jdbcType="VARCHAR" property="address" />
+    <result column="IdCard" jdbcType="VARCHAR" property="idCard" />
+    <result column="Phone" jdbcType="VARCHAR" property="phone" />
+    <result column="VolunteerName" jdbcType="VARCHAR" property="volunteerName" />
+    <result column="VolPhone" jdbcType="VARCHAR" property="volPhone" />
+    <result column="DrugStorePersonNo" jdbcType="BIGINT" property="drugStorePersonNo" />
+    <result column="CreateUser" jdbcType="VARCHAR" property="createUser" />
+    <result column="CreateTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UpdateUser" jdbcType="VARCHAR" property="updateUser" />
+    <result column="UpdateTime" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="Version" jdbcType="INTEGER" property="version" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    PtNo, CloudPassNo, Name, Address, IdCard, Phone, VolunteerName, VolPhone, DrugStorePersonNo, 
+    CreateUser, CreateTime, UpdateUser, UpdateTime, Version
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ptinfo
+    where PtNo = #{ptNo,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from ptinfo
+    where PtNo = #{ptNo,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.ecard.entity.PtInfo">
+    insert into ptinfo (PtNo, CloudPassNo, Name, 
+      Address, IdCard, Phone, 
+      VolunteerName, VolPhone, DrugStorePersonNo, 
+      CreateUser, CreateTime, UpdateUser, 
+      UpdateTime, Version)
+    values (#{ptNo,jdbcType=BIGINT}, #{cloudPassNo,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{idCard,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{volunteerName,jdbcType=VARCHAR}, #{volPhone,jdbcType=VARCHAR}, #{drugStorePersonNo,jdbcType=BIGINT}, 
+      #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateUser,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.ecard.entity.PtInfo">
+    insert into ptinfo
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="ptNo != null">
+        PtNo,
+      </if>
+      <if test="cloudPassNo != null">
+        CloudPassNo,
+      </if>
+      <if test="name != null">
+        Name,
+      </if>
+      <if test="address != null">
+        Address,
+      </if>
+      <if test="idCard != null">
+        IdCard,
+      </if>
+      <if test="phone != null">
+        Phone,
+      </if>
+      <if test="volunteerName != null">
+        VolunteerName,
+      </if>
+      <if test="volPhone != null">
+        VolPhone,
+      </if>
+      <if test="drugStorePersonNo != null">
+        DrugStorePersonNo,
+      </if>
+      <if test="createUser != null">
+        CreateUser,
+      </if>
+      <if test="createTime != null">
+        CreateTime,
+      </if>
+      <if test="updateUser != null">
+        UpdateUser,
+      </if>
+      <if test="updateTime != null">
+        UpdateTime,
+      </if>
+      <if test="version != null">
+        Version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="ptNo != null">
+        #{ptNo,jdbcType=BIGINT},
+      </if>
+      <if test="cloudPassNo != null">
+        #{cloudPassNo,jdbcType=BIGINT},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="volunteerName != null">
+        #{volunteerName,jdbcType=VARCHAR},
+      </if>
+      <if test="volPhone != null">
+        #{volPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="drugStorePersonNo != null">
+        #{drugStorePersonNo,jdbcType=BIGINT},
+      </if>
+      <if test="createUser != null">
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        #{version,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.ecard.entity.PtInfo">
+    update ptinfo
+    <set>
+      <if test="cloudPassNo != null">
+        CloudPassNo = #{cloudPassNo,jdbcType=BIGINT},
+      </if>
+      <if test="name != null and name !=''">
+        Name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null and address !=''">
+        Address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null and idCard !=''">
+        IdCard = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null and phone !=''">
+        Phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="volunteerName != null and volunteerName !=''">
+        VolunteerName = #{volunteerName,jdbcType=VARCHAR},
+      </if>
+      <if test="volPhone != null and volPhone !=''">
+        VolPhone = #{volPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="drugStorePersonNo != null and name !=''">
+        DrugStorePersonNo = #{drugStorePersonNo,jdbcType=BIGINT},
+      </if>
+      <if test="createUser != null">
+        CreateUser = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CreateTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateUser != null">
+        UpdateUser = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null">
+        Version = #{version,jdbcType=INTEGER},
+      </if>
+    </set>
+    where PtNo = #{ptNo,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.ecard.entity.PtInfo">
+    update ptinfo
+    set CloudPassNo = #{cloudPassNo,jdbcType=BIGINT},
+      Name = #{name,jdbcType=VARCHAR},
+      Address = #{address,jdbcType=VARCHAR},
+      IdCard = #{idCard,jdbcType=VARCHAR},
+      Phone = #{phone,jdbcType=VARCHAR},
+      VolunteerName = #{volunteerName,jdbcType=VARCHAR},
+      VolPhone = #{volPhone,jdbcType=VARCHAR},
+      DrugStorePersonNo = #{drugStorePersonNo,jdbcType=BIGINT},
+      CreateUser = #{createUser,jdbcType=VARCHAR},
+      CreateTime = #{createTime,jdbcType=TIMESTAMP},
+      UpdateUser = #{updateUser,jdbcType=VARCHAR},
+      UpdateTime = #{updateTime,jdbcType=TIMESTAMP},
+      Version = #{version,jdbcType=INTEGER}
+    where PtNo = #{ptNo,jdbcType=BIGINT}
+  </update>
+  <select id="findPtInfo" resultType="com.ecard.pojo.queryResult.PtInfoQr">
+  	select pt.PtNo,pt.CloudPassNo,
+  	(select c.Name from ptinfo p,cloudpassinfo c where p.CloudPassNo = c.CloudPassNo and c.CloudPassNo=pt.CloudPassNo)as Name,
+  	pt.DrugStorePersonNo,pt.IdCard,
+	(select Name 
+	from cloudpassinfo
+	where CloudPassNo= pt.DrugStorePersonNo)as personName,
+	cloud.DisableFlag 
+	from ptinfo pt, cloudpassinfo cloud
+  	where pt.CloudPassNo=cloud.CloudPassNo
+  	 <if test="name != null and name !=''">
+        and pt.Name like "%"#{name,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="idCard != null and idCard !=''">
+        and pt.IdCard = #{idCard,jdbcType=VARCHAR}
+      </if>
+      <if test="cloudPassNo != null">
+        and pt.DrugStorePersonNo = #{cloudPassNo,jdbcType=BIGINT}
+      </if>
+      <if test="disableFlag != 2">
+        and cloud.DisableFlag = #{disableFlag,jdbcType=BIGINT}
+      </if>
+  </select>
+  <select id="selectByCloudPassNo" parameterType="java.lang.Long" resultType="com.ecard.entity.PtInfo">
+  	select * from ptinfo where CloudPassNo = #{cloudPassNo,jdbcType=BIGINT}
+  </select>
+</mapper>

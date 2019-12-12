@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">  
+<configuration>
+    <typeAliases>
+        <typeAlias alias="Integer" type="java.lang.Integer" />
+        <typeAlias alias="Long" type="java.lang.Long" />
+        <typeAlias alias="HashMap" type="java.util.HashMap" />
+        <typeAlias alias="LinkedHashMap" type="java.util.LinkedHashMap" />
+        <typeAlias alias="ArrayList" type="java.util.ArrayList" />
+        <typeAlias alias="LinkedList" type="java.util.LinkedList" />
+        
+        <!-- 指定扫描包，会把包内所有的类都设置别名，别名的名称就是类名，大小写不敏感 -->
+		<package name="com.ecard.entity" />
+    </typeAliases>
+    
+    <!-- 配置mybatis的分页插件PageHelper -->
+	<plugins>
+		<!-- com.github.pagehelper为PageHelper类所在包名 -->
+		<plugin interceptor="com.github.pagehelper.PageHelper">
+			<!-- 设置数据库类型Oracle,Mysql,MariaDB,SQLite,Hsqldb,PostgreSQL六种数据库 -->
+			<property name="dialect" value="Mysql" />
+		</plugin>
+	</plugins>
+	
+	
+	<mappers>
+        <mapper resource="sqlmap/User.xml"/>
+        <package name="cn.itcast.mybatis.mapper"/>
+    </mappers>
+    
+</configuration>
